@@ -2,7 +2,7 @@
 
 This repository contains a suite of Python scripts for analyzing and predicting the energy consumption of drones during package delivery missions. The methodology combines physical modeling (e.g., induced power) with statistical methods (linear regression) to estimate energy needs across different flight phases.
 
-## 🚀 Overview
+## Overview
 
 The project processes high-frequency telemetry data from drone flights to:
 1.  **Identify Flight Regimes**: Automatically detect takeoff, cruise, and landing phases using altitude-time profiles and Gaussian filtering.
@@ -10,7 +10,7 @@ The project processes high-frequency telemetry data from drone flights to:
 3.  **Model Energy Consumption**: Train a linear regression model that correlates physical power requirements with measured battery usage.
 4.  **Validate Predictions**: Estimate energy consumption for test flights and evaluate accuracy using Average Relative Error (ARE).
 
-## 📊 Workflow Flowchart
+## Workflow Flowchart
 
 Below is the high-level workflow of the data processing and modeling pipeline:
 
@@ -52,7 +52,7 @@ graph TD
     H --> I
 ```
 
-## 📂 Project Structure
+##  Project Structure
 
 The project has been organized into a modular structure for better maintainability:
 
@@ -72,7 +72,7 @@ energy_consumption/
 └── README.md            # Project documentation
 ```
 
-## 🛠️ Installation & Dependencies
+##  Installation & Dependencies
 
 Ensure you have Python 3.x installed. The following libraries are required:
 
@@ -80,7 +80,7 @@ Ensure you have Python 3.x installed. The following libraries are required:
 pip install pandas numpy scipy matplotlib seaborn geopy metar
 ```
 
-## 📖 Usage
+## Usage
 
 ### ⚙️ Run the Entire Pipeline
 The easiest way to run the analysis is via the `main.py` entry point in the root directory:
@@ -89,7 +89,7 @@ python main.py
 ```
 This script ensures all directories exist, sets up the Python path, and runs the full analysis pipeline.
 
-### 🧪 Running Individual Modules
+### Running Individual Modules
 You can also run modules individually using the `-m` flag from the project root:
 ```bash
 # Run the modeling logic
@@ -99,5 +99,5 @@ python -m src.modeling.model_one
 python -m src.visualization.plot_deliveryDistances
 ```
 
-## 📈 Results
+## Results
 Processed data and visualizations are saved in the `results/` directory. The primary metric for model evaluation is the **Average Relative Error (ARE)**, which measures the accuracy of predicted energy consumption against actual measured values.
