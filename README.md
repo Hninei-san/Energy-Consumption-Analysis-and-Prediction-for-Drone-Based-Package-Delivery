@@ -2,7 +2,7 @@
 
 This repository contains a suite of Python scripts for analyzing and predicting the energy consumption of drones during package delivery missions. The methodology combines physical modeling (e.g., induced power) with statistical methods (linear regression) to estimate energy needs across different flight phases.
 
-## 🚀 Overview
+## Overview
 
 The project processes high-frequency telemetry data from drone flights to:
 1.  **Identify Flight Regimes**: Automatically detect takeoff, cruise, and landing phases using altitude-time profiles and Gaussian filtering.
@@ -10,7 +10,7 @@ The project processes high-frequency telemetry data from drone flights to:
 3.  **Model Energy Consumption**: Train a linear regression model that correlates physical power requirements with measured battery usage.
 4.  **Validate Predictions**: Estimate energy consumption for test flights and evaluate accuracy using Average Relative Error (ARE).
 
-## 📊 Workflow Flowchart
+## Workflow Flowchart
 
 Below is the high-level workflow of the data processing and modeling pipeline:
 
@@ -52,7 +52,7 @@ graph TD
     H --> I
 ```
 
-## 📂 Project Structure
+##  Project Structure
 
 | File | Description |
 | :--- | :--- |
@@ -65,7 +65,7 @@ graph TD
 | `inducedVelocity.py` | Physics model for induced velocity calculations. |
 | `plot_*.py` | Various scripts for generating figures (e.g., flight regimes, regressions). |
 
-## 🛠️ Installation & Dependencies
+## Installation & Dependencies
 
 Ensure you have Python 3.x installed. The following libraries are required:
 
@@ -73,7 +73,7 @@ Ensure you have Python 3.x installed. The following libraries are required:
 pip install pandas numpy scipy matplotlib seaborn
 ```
 
-## 📖 Usage
+## Usage
 
 ### 1. Generate Energy Summary
 To process the raw flight data and create an energy summary:
@@ -94,5 +94,5 @@ You can run individual plotting scripts to visualize the results:
 python plot_deliveryDistances.py
 ```
 
-## 📈 Results
+## Results
 The current model evaluates accuracy using the **Average Relative Error (ARE)** metric, providing a robust measure of how closely predicted energy consumption matches measured values across different payloads and speeds.
