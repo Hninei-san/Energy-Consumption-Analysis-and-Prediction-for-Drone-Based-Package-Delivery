@@ -35,7 +35,7 @@ def linear_regression(df):
 	df_coefficients.loc[3] = ['total', wl_b1, wl_b0, wl_pvalue, wl_Rsq]
 
 	df_coefficients.set_index('regime', inplace=True)
-	df_coefficients.to_csv('coefficients_model1.csv')
+	df_coefficients.to_csv('results/tables/coefficients_model1.csv')
 	return df_coefficients
 
 
@@ -97,7 +97,7 @@ def Error(Measured,Estimated):
 def main():
 	# Use the generated energy summary
 	try:
-	    df = pd.read_csv('energy_summary_model1.csv')
+	    df = pd.read_csv('results/tables/energy_summary_model1.csv')
 	    df_time = df # Same file contains times
 	except FileNotFoundError:
 	    print("Error: energy_summary_model1.csv not found. Run energy_summary.py first.")
@@ -148,7 +148,7 @@ def main():
 	model1Parameters['regime'] = ['takeoff','cruise','landing']
 	model1Parameters['b0'] = [tk_b0,cr_b0,ld_b0]
 	model1Parameters['b1'] = [tk_b1,cr_b1,ld_b1]
-	model1Parameters.to_csv('Model1Parameters.csv')
+	model1Parameters.to_csv('results/tables/Model1Parameters.csv')
 
 	df['energy_takeoff'] = EnergyMeasured(tk_y,tk_time)
 	df['energy_cruise'] = EnergyMeasured(cr_y, cr_time)

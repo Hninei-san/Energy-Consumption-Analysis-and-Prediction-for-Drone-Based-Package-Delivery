@@ -4,13 +4,13 @@ warnings.filterwarnings("ignore", message="Unable to import Axes3D")
 
 import pandas as pd
 import numpy as np
-import power_functions as pwf
+import src.core.power_functions as pwf
 import os
 import matplotlib.pyplot as plt
 #import fixColumn as fix
-import airdensity
-import FindingRegimeFilter
-import inducedVelocity
+import src.core.airdensity as airdensity
+import src.processing.FindingRegimeFilter as FindingRegimeFilter
+import src.core.inducedVelocity as inducedVelocity
 import scipy.integrate
 import time
 from geopy.distance import geodesic
@@ -117,7 +117,7 @@ def generateInflightComponents(df_log,flight):
     df['Pi_hover'] = pwf.InducedPower(df_copy)
 
     os.chdir(mainpath)
-    df.to_csv('%d.csv' % (flight))
+    df.to_csv('results/tables/%d.csv' % (flight))
     print("--- flight %d: %.2f seconds ---" % (flight, float(time.time() - start_time)))
     return(df)
 
@@ -188,7 +188,7 @@ def main():
         df['Pi_hover'] = pwf.InducedPower(df_copy)
 
         # Output to current directory
-        df.to_csv('%d_inflight.csv'%(flight))
+        df.to_csv('results/tables/%d_inflight.csv'%(flight))
         print("--- flight %d: %.2f seconds ---" % (flight, float(time.time() - start_time)))
 
 

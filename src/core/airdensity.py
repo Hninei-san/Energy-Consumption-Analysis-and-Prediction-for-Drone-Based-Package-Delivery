@@ -4,7 +4,7 @@ warnings.filterwarnings("ignore", message="Unable to import Axes3D")
 
 import pandas as pd
 import datetime
-import METAR_KAGC
+import src.utils.METAR_KAGC as METAR_KAGC
 import numpy as np
 import os
    
@@ -43,7 +43,7 @@ def CreateCsv(df):
     print(rho)
 
     airdensity = pd.DataFrame({"flight":flights, 'rho':rho, "wind":wind})
-    airdensity.to_csv("airdensity.csv")
+    airdensity.to_csv("results/tables/airdensity.csv")
 
 
 
@@ -100,7 +100,7 @@ def AirDensityForIndex(df_log):
     return rho
 
 def main():
-    data = pd.read_csv("/home/eisan/energy_consumption/dataset/flights.csv")
+    data = pd.read_csv("dataset/flights.csv")
     CreateCsv(data)
 
 

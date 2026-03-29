@@ -7,11 +7,11 @@ import numpy as np
 import os
 import matplotlib.pyplot as plt
 import seaborn as sns
-import FindingRegimeFilter
+import src.processing.FindingRegimeFilter as FindingRegimeFilter
 import scipy.integrate
-import inflightcomponents as inflight
+import src.core.inflightcomponents as inflight
 import matplotlib.ticker as mtick
-import LinearRegression as lr
+import src.modeling.LinearRegression as lr
 
 plt.rcParams["font.family"] = "Helvetica"
 plt.rc('font',**{'family':'sans-serif','sans-serif':['Helvetica']})
@@ -70,8 +70,8 @@ def create_energy_summary(data):
     
     if energy_summary_list:
         energy_summary = pd.concat(energy_summary_list, ignore_index=True)
-        energy_summary.to_csv('energy_summary_model2.csv', index=False)
-        print("\nEnergy Summary Created as energy_summary_model2.csv")
+        energy_summary.to_csv('results/tables/energy_summary_model2.csv', index=False)
+        print("\nEnergy Summary Created as results/tables/energy_summary_model2.csv")
 
 def test(df, coeff):
     b1_tk = coeff.loc['takeoff', 'b1']
@@ -105,17 +105,17 @@ def main():
     data['Power'] = data['battery_current']*data['battery_voltage']
     
     try:
-        summary = pd.read_csv('energy_summary_model2.csv')
+        summary = pd.read_csv('results/tables/energy_summary_model2.csv')
     except:
         create_energy_summary(data)
-        summary = pd.read_csv('energy_summary_model2.csv')
+        summary = pd.read_csv('results/tables/energy_summary_model2.csv')
         
-    # Check if poll.csv exists, otherwise create a random one or use index
-    if os.path.exists('poll.csv'):
-        poll = pd.read_csv('poll.csv')
+    # Check if results/tables/poll.csv exists, otherwise create a random one or use index
+    if os.path.exists('results/tables/poll.csv'):
+        poll = pd.read_csv('results/tables/poll.csv')
     else:
         poll = pd.DataFrame({"flight":np.random.choice(index, size=min(len(index), 120), replace=False)})
-        poll.to_csv('poll.csv', index=False)
+        poll.to_csv('results/tables/poll.csv', index=False)
 
     summary.payload = summary.payload.astype(int)
     summary_poll = summary[summary.flight.isin(poll.flight)].copy()
@@ -124,7 +124,7 @@ def main():
     test_sample = summary[~summary.flight.isin(poll.flight)].copy()
     test_sample['energy_model'] = test(test_sample, coeff)
     test_sample["ARE"] = ARE(test_sample)
-    test_sample.to_csv('Test_model_1.csv', index=False)
+    test_sample.to_csv('results/tables/Test_model_1.csv', index=False)
     print("ARE: Average = %.4f; Median = %.4f"%(test_sample.ARE.mean(), test_sample.ARE.median()))
 
 if __name__ == "__main__":

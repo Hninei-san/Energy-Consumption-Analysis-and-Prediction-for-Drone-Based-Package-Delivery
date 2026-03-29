@@ -1,6 +1,6 @@
 import pandas as pd
 import matplotlib.pyplot as plt
-from calculate_energy import energy_two_way
+from src.modeling.calculate_energy import energy_two_way
 import numpy as np
 import seaborn as sns
 import os
@@ -54,10 +54,8 @@ def two_way_energy():
     plt.text(1.5, 95, '500 g', rotation=60, fontsize=12, color="gray")
     plt.text(1.8, 95, 'No payload', rotation=57, fontsize=12, color="gray")
     plt.legend(['4 m/s', "12 m/s"], title='Cruise speed', fontsize=14, frameon=False).get_title().set_fontsize(14)
-    os.chdir(r"/home/eisan/energy_consumption")
     plt.grid(visible=True, which='major', axis='both', color='gray', linewidth=1.0, alpha=0.1)
-    plt.savefig('two_way_distance.pdf')
-    os.chdir(mainpath)
+    plt.savefig('results/figures/two_way_distance.pdf')
     plt.show()
 
 def two_way_ghg():
@@ -96,9 +94,8 @@ def two_way_ghg():
     sns.despine(top=True, right=True)
     plt.xlabel('Delivery Distance [km]', fontsize=18)
     plt.ylabel('CO₂e emissions \ntwo-way delivery [g/package]', fontsize=18)
-    os.chdir(r"/home/eisan/energy_consumption")
     plt.grid(visible=True, which='major', axis='both', color='gray', linewidth=1.0, alpha=0.1)
-    plt.savefig('two_way_ghg.pdf')
+    plt.savefig('results/figures/two_way_ghg.pdf')
     plt.show()
 
 def figure1():
@@ -107,7 +104,7 @@ def figure1():
     plt.rcParams["font.family"] = "Helvetica"
     plt.rc('font', **{'family': 'sans-serif', 'sans-serif': ['Helvetica']})
 
-    coeff = pd.read_csv('/home/eisan/energy_consumption/coefficients_model1.csv', index_col=0)
+    coeff = pd.read_csv('results/tables/coefficients_model1.csv', index_col=0)
     print(coeff)
 
     distance = np.arange(0, 8.5, 0.01)
@@ -151,7 +148,7 @@ def figure1():
     ax1.text(1.2, 95, 'No payload', rotation=54., fontsize=12, color="gray")
     ax1.legend(['4 m/s', "12 m/s"], title='Cruise speed', fontsize=14, frameon=False).get_title().set_fontsize(14)
     ax1.grid(visible=True, which='major', axis='both', color='gray', linewidth=1.0, alpha=0.1)
-    coeff = pd.read_csv('coefficients_model1.csv', index_col=0)
+    coeff = pd.read_csv('results/tables/coefficients_model1.csv', index_col=0)
 
     distance = np.arange(0, 6.5, 0.01)
     e_1000 = [energy_two_way(d, coeff, payload=500, speed=12) for d in distance]
@@ -177,11 +174,9 @@ def figure1():
     sns.despine(top=True, right=True)
     ax2.set_xlabel('Delivery Distance [km]\n(b)', fontsize=18)
     ax2.set_ylabel('CO₂e emissions \ntwo-way delivery [g/package]', fontsize=18)
-    os.chdir(r"/home/eisan/energy_consumption")
     plt.grid(visible=True, which='major', axis='both', color='gray', linewidth=1.0, alpha=0.1)
-    os.chdir(r"/home/eisan/energy_consumption")
 
-    plt.savefig("figure1.pdf")
+    plt.savefig("results/figures/figure1.pdf")
     plt.show()
 
 
